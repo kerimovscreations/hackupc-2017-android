@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">HNotes-android</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="take_picture">Take picture</string>
+    <string name="choose_from_library">Choose from library</string>
+    <string name="permission_denied">Permission denied</string>
+    <string name="error">Error occurred</string>
+    <string name="permission_needed">Please give permission to upload photos</string>
+</resources>
