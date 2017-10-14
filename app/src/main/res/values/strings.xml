@@ -8,4 +8,10 @@
     <string name="permission_denied">Permission denied</string>
     <string name="error">Error occurred</string>
     <string name="permission_needed">Please give permission to upload photos</string>
+    <string name="loading">Loading...</string>
+    <string name="add_new_ones">Add new ones</string>
+    <string name="login">Login</string>
+    <string name="take_photo">Take photo</string>
+    <string name="browse">Browse</string>
+    <string name="history">History</string>
 </resources>

@@ -47,18 +47,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initVars() {
-        findViewById(R.id.take_snap).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.take_photo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mUserChooseTask = 0;
                 checkPermission();
             }
         });
-        findViewById(R.id.choose_from_library).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.browse).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mUserChooseTask = 1;
                 checkPermission();
+            }
+        });
+        findViewById(R.id.history).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(mContext, HistoryActivity.class));
             }
         });
     }
@@ -174,8 +180,4 @@ public class MainActivity extends AppCompatActivity {
         outState.putParcelable("file_uri", mFileUri);
     }
 
-
-    public void onHistory(View view) {
-        startActivity(new Intent(mContext, HistoryActivity.class));
-    }
 }

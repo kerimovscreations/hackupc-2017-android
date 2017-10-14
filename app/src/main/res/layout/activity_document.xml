@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="hajalibayram.hnotes_android.activity.DocumentActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+
+        <ImageView
+            android:id="@+id/doc_back"
+            android:layout_width="?actionBarSize"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:padding="@dimen/normal_margin"
+            android:src="@drawable/ic_back" />
+
+
+        <ImageView
+            android:id="@+id/doc_delete"
+            android:layout_width="?actionBarSize"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:padding="@dimen/normal_margin"
+            android:src="@drawable/ic_trash" />
+
+        <ImageView
+            android:id="@+id/doc_share"
+            android:layout_width="?actionBarSize"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_toStartOf="@id/doc_delete"
+            android:padding="@dimen/normal_margin"
+            android:src="@drawable/ic_share" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/doc_back"
+            android:layout_toStartOf="@id/doc_share"
+            android:gravity="center"
+            android:text="Documents"
+            android:textColor="#fff"
+            android:textSize="22dp" />
+    </RelativeLayout>
+
+
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/relativeLayout" />
+</RelativeLayout>

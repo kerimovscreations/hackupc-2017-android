@@ -36,8 +36,12 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".activity.Main2Activity" />
-        <activity android:name=".activity.HistoryActivity"></activity>
+        <activity
+            android:name=".activity.HistoryActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.DocumentActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
