@@ -43,11 +43,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mContext = this;
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-
         initVars();
     }
 
@@ -56,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mUserChooseTask = 0;
-                Log.e("Tag", "1.0.0");
                 checkPermission();
             }
         });
@@ -64,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mUserChooseTask = 1;
-                Log.e("Tag", "1.2.0");
                 checkPermission();
             }
         });
@@ -182,4 +175,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void onHistory(View view) {
+        startActivity(new Intent(mContext, HistoryActivity.class));
+    }
 }

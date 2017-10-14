@@ -35,5 +35,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
+        <activity android:name=".activity.Main2Activity" />
+        <activity android:name=".activity.HistoryActivity"></activity>
     </application>
+
 </manifest>
