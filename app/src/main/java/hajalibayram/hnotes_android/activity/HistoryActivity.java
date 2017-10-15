@@ -133,8 +133,10 @@ public class HistoryActivity extends AppCompatActivity {
 
                     if (response.get("status").getAsInt() == 200) {
                         for (JsonElement item : response.get("data").getAsJsonObject().get("notes").getAsJsonArray())
-                            item.getAsJsonObject();
-                        mList.add(new HistoryItem());
+                            mList.add(new HistoryItem(item.getAsJsonObject().get("title").getAsString(),
+                                    item.getAsJsonObject().get("created_at").getAsString(),
+                                    item.getAsJsonObject().get("content").getAsString()));
+
 //                        startActivity(new Intent(mContext, MainActivity.class));
                     } else {
 //                                                JsonObject errorObj = response.get("error").getAsJsonObject();

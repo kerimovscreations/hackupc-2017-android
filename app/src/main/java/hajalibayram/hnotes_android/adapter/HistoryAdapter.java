@@ -5,10 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -57,9 +56,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     public void onBindViewHolder(HistoryAdapter.ViewHolder viewHolder, int position) {
         HistoryItem bItem = mList.get(position);
 
-        Picasso.with(mContext)
-                .load(bItem.getImg_url())
-                .into(viewHolder.img);
+        viewHolder.webView.loadData(bItem.getImg_url(), "text/html; charset=utf-8", "UTF-8");
 
         viewHolder.title.setText(bItem.getTitle());
         viewHolder.date.setText(bItem.getDate());
@@ -81,19 +78,20 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView title, date;
-        ImageView img, eye, share, delete;
+        ImageView eye, share, delete;
+        WebView webView;
 
         ViewHolder(final View itemView) {
             super(itemView);
 
             title = itemView.findViewById(R.id.history_item_title);
             date = itemView.findViewById(R.id.history_item_date);
-            img = itemView.findViewById(R.id.history_item_img);
+            webView = itemView.findViewById(R.id.history_item_img);
             eye = itemView.findViewById(R.id.history_item_eye);
             share = itemView.findViewById(R.id.history_item_share);
             delete = itemView.findViewById(R.id.history_item_delete);
 
-            img.setOnClickListener(new View.OnClickListener() {
+            webView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mListener != null) {

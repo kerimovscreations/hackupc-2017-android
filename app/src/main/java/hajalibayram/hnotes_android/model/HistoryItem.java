@@ -1,7 +1,5 @@
 package hajalibayram.hnotes_android.model;
 
-import io.realm.RealmObject;
-
 /**
  * Created by hajali on 10/14/17
  * <p>
@@ -10,7 +8,7 @@ import io.realm.RealmObject;
  * Email: hajalibayram@outlook.com
  */
 
-public class HistoryItem extends RealmObject {
+public class HistoryItem {
     private String title, date, img_url;
 
     public HistoryItem(String title, String date, String img_url) {
