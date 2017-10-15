@@ -91,7 +91,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             share = itemView.findViewById(R.id.history_item_share);
             delete = itemView.findViewById(R.id.history_item_delete);
 
-            webView.setOnClickListener(new View.OnClickListener() {
+            title.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mListener != null) {

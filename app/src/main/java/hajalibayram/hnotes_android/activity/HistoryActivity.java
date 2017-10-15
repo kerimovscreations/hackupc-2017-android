@@ -87,7 +87,7 @@ public class HistoryActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View itemView, int position) {
                 startActivity(new Intent(mContext, DocumentActivity.class)
-                        .putExtra("PARAM", mList.get(position).getImg_url()));
+                        .putExtra("URL", mList.get(position).getImg_url()));
             }
 
             @Override

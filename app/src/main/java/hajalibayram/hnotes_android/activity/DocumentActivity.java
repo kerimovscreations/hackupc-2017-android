@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import hajalibayram.hnotes_android.R;
 
@@ -33,22 +32,13 @@ public class DocumentActivity extends AppCompatActivity {
         mProgressDialog = new ProgressDialog(mContext);
         mProgressDialog.setMessage(getString(R.string.loading));
 
-        mUrlStr = getIntent().getStringExtra("PARAMS");
+        mUrlStr = getIntent().getStringExtra("URL");
 
 
         mWebView = (WebView) findViewById(R.id.web_view);
-
-        getData();
+        mWebView.loadData(mUrlStr, "text/html; charset=utf-8", "UTF-8");
 
     }
 
-    private void getData() {
-        mWebView.loadUrl(mUrlStr);
-
-        mWebView.setWebViewClient(new WebViewClient() {
-            public void onPageFinished(WebView view, String url) {
-            }
-        });
-    }
 
 }
