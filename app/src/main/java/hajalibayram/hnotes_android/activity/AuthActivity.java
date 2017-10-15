@@ -51,6 +51,7 @@ public class AuthActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                startActivity(new Intent(mContext, MainActivity.class));
             }
         });
 

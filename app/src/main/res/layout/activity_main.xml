@@ -12,13 +12,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:gravity="center">
+            android:gravity="center|end">
 
             <TextView
                 android:id="@+id/auth_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:layout_marginEnd="@dimen/normal_margin"
                 android:gravity="center"
                 android:text="@string/login"
                 android:textColor="#fff"
@@ -37,7 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/auth_btn_lay"
-            android:layout_margin="@dimen/normal_margin"
+            android:layout_marginTop="@dimen/xxlarge_margin"
+            android:fontFamily="sans-serif-light"
             android:gravity="center"
             android:text="@string/add_new_ones"
             android:textColor="#fff"
@@ -69,10 +69,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
                     android:gravity="center"
                     android:text="@string/take_photo"
                     android:textColor="#fff"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -92,10 +93,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
                     android:gravity="center"
                     android:text="@string/browse"
                     android:textColor="#fff"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
             </LinearLayout>
         </LinearLayout>
@@ -106,6 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/add_new_layout"
             android:layout_margin="@dimen/normal_margin"
+            android:fontFamily="sans-serif-light"
             android:gravity="center"
             android:text="@string/add_new_ones"
             android:textColor="#fff"
@@ -129,12 +132,20 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
                 android:gravity="center"
                 android:text="@string/history"
                 android:textColor="#fff"
-                android:textSize="20dp" />
+                android:textSize="18dp" />
 
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_alignParentBottom="true"
+
+            android:src="@drawable/app_icon_title" />
     </RelativeLayout>
     <!--<LinearLayout-->
     <!--android:layout_width="match_parent"-->

@@ -24,5 +24,7 @@
     <string name="log_out_alert_sub">You sure you want to terminate your sync?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
+    <string name="sync_your_data">Sync your data...</string>
+    <string name="with_facebook">with Facebook</string>
 
 </resources>

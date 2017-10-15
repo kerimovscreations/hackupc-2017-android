@@ -2,4 +2,7 @@
 <resources>
     <dimen name="small_margin">8dp</dimen>
     <dimen name="normal_margin">16dp</dimen>
+    <dimen name="xlarge_margin">32dp</dimen>
+    <dimen name="xxlarge_margin">64dp</dimen>
+    <dimen name="xxxlarge_margin">128dp</dimen>
 </resources>

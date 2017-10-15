@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import hajalibayram.hnotes_android.R;
 import hajalibayram.hnotes_android.adapter.HistoryAdapter;
 import hajalibayram.hnotes_android.model.HistoryItem;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class HistoryActivity extends AppCompatActivity {
 
@@ -25,12 +27,23 @@ public class HistoryActivity extends AppCompatActivity {
     private HistoryAdapter mAdapter;
     private ArrayList<HistoryItem> mList;
     private SwipeRefreshLayout mSwipeRLayout;
+    private Realm mRealm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         mContext = this;
+
+        Realm.init(mContext);
+        try {
+            mRealm = Realm.getDefaultInstance();
+        } catch (Exception e) {
+            RealmConfiguration config = new RealmConfiguration.Builder()
+                    .deleteRealmIfMigrationNeeded()
+                    .build();
+            mRealm = Realm.getInstance(config);
+        }
 
         initVars();
     }
@@ -74,6 +87,8 @@ public class HistoryActivity extends AppCompatActivity {
                 finish();
             }
         });
+//        RealmResults<ShoppingProductOption> objectList = mRealm.where(ShoppingProductOption.class).equalTo("branch_id", mList.get(position).getBranch_id()).findAll();
+
     }
 
     private void getData() {

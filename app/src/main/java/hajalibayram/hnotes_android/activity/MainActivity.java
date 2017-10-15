@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onClick(View v) {
                             mEditor.putBoolean("is_logged", false).apply();
 
-//                            finish();
+                            finish();
                             startActivity(getIntent());
                         }
                     });
