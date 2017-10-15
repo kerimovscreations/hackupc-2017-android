@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HNotes-android</string>
+    <string name="app_name">HNotes</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -14,4 +14,12 @@
     <string name="take_photo">Take photo</string>
     <string name="browse">Browse</string>
     <string name="history">History</string>
+    <string name="documents">Documents</string>
+
+    <string name="facebook_app_id">179425919281323</string>
+    <string name="fb_login_protocol_scheme">fb179425919281323</string>
+    <string name="use_facebook">Use Facebook</string>
+    <string name="use_google">Use Google</string>
+    <string name="sign_in_with">Sign in with...</string>
+
 </resources>

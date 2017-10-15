@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context="hajalibayram.hnotes_android.activity.AuthActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimaryDark">
+
+        <ImageView
+            android:id="@+id/auth_back"
+            android:layout_width="?actionBarSize"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:padding="@dimen/normal_margin"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Sign in"
+            android:textColor="#fff"
+            android:textSize="22dp" />
+    </RelativeLayout>
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/sign_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/auth_btn"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/normal_margin"
+        android:gravity="center"
+        android:text="@string/sign_in_with"
+        android:textAllCaps="true"
+        android:textColor="#fff"
+        android:textSize="28dp" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/facebook_login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_below="@id/sign_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="@dimen/small_margin"
+        android:layout_marginStart="@dimen/small_margin">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/com_facebook_blue">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="?actionBarSize"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_facebook_128" />
+
+            <TextView
+                android:id="@+id/fb_login_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/imageView2"
+                android:text="@string/use_facebook"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="22dp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/google_login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_below="@id/facebook_login_btn"
+        android:layout_margin="@dimen/small_margin">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="?actionBarSize"
+                android:layout_height="match_parent"
+                android:padding="@dimen/small_margin"
+                android:src="@drawable/ic_google_128" />
+
+            <TextView
+                android:id="@+id/google_login_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/imageView3"
+                android:text="@string/use_google"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="22dp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

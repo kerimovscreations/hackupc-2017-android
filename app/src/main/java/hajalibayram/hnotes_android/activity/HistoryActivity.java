@@ -1,6 +1,7 @@
 package hajalibayram.hnotes_android.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -52,7 +53,8 @@ public class HistoryActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new HistoryAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View itemView, int position) {
-
+                startActivity(new Intent(mContext, DocumentActivity.class)
+                        .putExtra("PARAM", mList.get(position).getImg_url()));
             }
 
             @Override
@@ -66,7 +68,12 @@ public class HistoryActivity extends AppCompatActivity {
             }
         });
 
-
+        findViewById(R.id.history_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void getData() {

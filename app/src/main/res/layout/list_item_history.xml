@@ -34,7 +34,8 @@
             android:layout_below="@id/history_item_img"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="24dp"
-            android:src="@drawable/ic_trash" />
+            android:src="@drawable/ic_trash"
+            android:tint="@color/colorPrimaryDark" />
 
         <ImageView
             android:id="@+id/history_item_share"
@@ -44,7 +45,8 @@
             android:layout_marginEnd="16dp"
             android:layout_marginTop="24dp"
             android:layout_toStartOf="@id/history_item_delete"
-            android:src="@drawable/ic_share" />
+            android:src="@drawable/ic_share"
+            android:tint="@color/colorPrimaryDark" />
 
 
         <TextView

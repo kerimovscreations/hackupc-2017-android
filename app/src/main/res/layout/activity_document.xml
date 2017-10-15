@@ -8,7 +8,8 @@
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize">
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimaryDark">
 
         <ImageView
             android:id="@+id/doc_back"

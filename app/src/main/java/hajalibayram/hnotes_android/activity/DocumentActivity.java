@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -17,7 +16,6 @@ public class DocumentActivity extends AppCompatActivity {
     private Context mContext;
     private String mUrlStr;
     private WebView mWebView;
-    private Toolbar mToolbar;
 
     private ProgressDialog mProgressDialog;
 
@@ -35,7 +33,7 @@ public class DocumentActivity extends AppCompatActivity {
         mProgressDialog = new ProgressDialog(mContext);
         mProgressDialog.setMessage(getString(R.string.loading));
 
-        mUrlStr = "https://onbranch.com/privacy";
+        mUrlStr = getIntent().getStringExtra("PARAMS");
 
 
         mWebView = (WebView) findViewById(R.id.web_view);
