@@ -44,10 +44,15 @@ public class DocumentActivity extends AppCompatActivity {
         findViewById(R.id.doc_share).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                share(mUrlStr);
             }
         });
-        share(mUrlStr);
+        findViewById(R.id.doc_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 
