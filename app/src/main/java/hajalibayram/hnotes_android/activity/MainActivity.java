@@ -20,9 +20,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,12 +39,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import cz.msebera.android.httpclient.Header;
 import hajalibayram.hnotes_android.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
+    private Toolbar toolbar;
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     private int mUserChooseTask;
     private Uri mFileUri;
@@ -44,6 +54,11 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences mPrefs;
     private SharedPreferences.Editor mEditor;
     private TextView mAuth;
+    private String title;
+
+    private AsyncHttpClient mClient;
+    private JsonParser mParser;
+    private Gson mGson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +73,10 @@ public class MainActivity extends AppCompatActivity {
         mPrefs = mContext.getSharedPreferences("LocalPreference", Context.MODE_PRIVATE);
         mEditor = mPrefs.edit();
         isLogged = mPrefs.getBoolean("is_logged", false);
+
+        mClient = new AsyncHttpClient(false, 80, 443);
+        mParser = new JsonParser();
+        mGson = new Gson();
 
         mAuth = (TextView) findViewById(R.id.auth_btn);
 
@@ -152,20 +171,114 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == SELECT_FILE) {
             if (resultCode == RESULT_OK) {
-//                cropImage(data.getData());
-                Log.e("Tag", data.getData().toString());
+                final BottomSheetDialog bsd = new BottomSheetDialog(mContext);
+                bsd.setCancelable(false);
+
+                final View sheetView = getLayoutInflater().inflate(R.layout.view_bottom_sheet_naming, null);
+                title = null;
+                sheetView.findViewById(R.id.submit).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        title = ((EditText) sheetView.findViewById(R.id.title_et)).getText().length() <= 0
+                                ? "ADFasdf"
+                                : ((EditText) sheetView.findViewById(R.id.title_et)).getText().toString();
+
+                        uploadImage(bsd);
+
+                    }
+                });
+                bsd.setContentView(sheetView);
+                bsd.show();
             }
         } else if (requestCode == REQUEST_CAMERA) {
             if (resultCode == RESULT_OK) {
-                if (mFileUri != null)
-//                    cropImage(mFileUri);
-                    Log.e("Tag", data.getData().toString());
-                else
-                    Toast.makeText(mContext, getString(R.string.error), Toast.LENGTH_SHORT).show();
+                if (mFileUri != null) {
+                    final BottomSheetDialog bsd = new BottomSheetDialog(mContext);
+                    bsd.setCancelable(false);
+
+                    Log.d("TAG", mFileUri.toString());
+                    final View sheetView = getLayoutInflater().inflate(R.layout.view_bottom_sheet_naming, null);
+                    title = null;
+                    sheetView.findViewById(R.id.submit).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            title = ((EditText) sheetView.findViewById(R.id.title_et)).getText().length() <= 0
+                                    ? "ADFasdf"
+                                    : ((EditText) sheetView.findViewById(R.id.title_et)).getText().toString();
+
+                            uploadImage(bsd);
+
+                        }
+                    });
+                    bsd.setContentView(sheetView);
+                    bsd.show();
+
+                } else
+                    Toast.makeText(mContext, "Error", Toast.LENGTH_SHORT).show();
             }
         }
 
     }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mFileUri = savedInstanceState.getParcelable("file_uri");
+    }
+
+    private void uploadImage(final BottomSheetDialog bsd) {
+        if (mFileUri != null) {
+
+            File uploadPhoto = new File(mFileUri.getPath());
+            RequestParams params = new RequestParams();
+
+            File[] uploadPhotos = {uploadPhoto};
+
+
+            try {
+                String url = "http://www.hnotes.org/api/notes";
+                Log.d("ASDA", mFileUri.toString());
+
+                params.put("image", new File(mFileUri.getPath()));
+
+                params.setHttpEntityIsRepeatable(true);
+                params.setForceMultipartEntityContentType(true);
+                params.put("title", title);
+                Log.d("ASDA", params.toString());
+//                            params.put("user_id", isLogged ? mPrefs.getString("user_id", "") : "");
+//                            params.put("image", isLogged ? mPrefs.getString("api_token", "") : "");
+//
+                mClient.post(url, params, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                        JsonParser parser = new JsonParser();
+                        JsonObject response = parser.parse(new String(responseBody)).getAsJsonObject();
+
+                        if (response.get("status").getAsInt() == 200) {
+                            JsonArray responseData = response.get("data").getAsJsonArray();
+
+                            startActivity(new Intent(mContext, MainActivity.class));
+                            bsd.cancel();
+
+                        } else {
+                            JsonObject errorObj = response.get("error").getAsJsonObject();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                        Toast.makeText(mContext, getString(R.string.error), Toast.LENGTH_LONG).show();
+
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+        }
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

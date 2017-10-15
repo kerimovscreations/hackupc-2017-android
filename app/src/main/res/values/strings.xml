@@ -26,5 +26,6 @@
     <string name="yes">Yes</string>
     <string name="sync_your_data">Sync your data...</string>
     <string name="with_facebook">with Facebook</string>
+    <string name="submit">Submit</string>
 
 </resources>

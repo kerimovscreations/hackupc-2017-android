@@ -2,9 +2,11 @@ package hajalibayram.hnotes_android.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.appcompat.BuildConfig;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,13 +21,18 @@ import com.facebook.GraphResponse;
 import com.facebook.LoggingBehavior;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import org.json.JSONObject;
 
 import java.util.Arrays;
 
+import cz.msebera.android.httpclient.Header;
 import hajalibayram.hnotes_android.R;
 
 public class AuthActivity extends AppCompatActivity {
@@ -36,6 +43,9 @@ public class AuthActivity extends AppCompatActivity {
     private Context mContext;
 //    private static final int GOOGLE_SIGN_IN_CODE = 464;
 
+    private AsyncHttpClient mClient;
+    private JsonParser mParser;
+    private Gson mGson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +56,11 @@ public class AuthActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_auth);
         mContext = this;
+
+        mClient = new AsyncHttpClient(false, 80, 443);
+        mParser = new JsonParser();
+        mGson = new Gson();
+
 
         findViewById(R.id.auth_back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,17 +158,58 @@ public class AuthActivity extends AppCompatActivity {
 
                                 JsonParser jsonParser = new JsonParser();
                                 JsonObject gsonObject = (JsonObject) jsonParser.parse(object.toString());
+//                                Log.d("TAGG",gsonObject.getAsString());
 
-                                String email = (object.toString().contains("email") && gsonObject.get("email").getAsString() != null)
-                                        ? gsonObject.get("email").getAsString()
-                                        : "";
 
                                 mContext.getSharedPreferences("LocalPreference", MODE_PRIVATE).edit().putString("name", (object.toString().contains("name") && gsonObject.get("name").getAsString() != null)
                                         ? gsonObject.get("name").getAsString()
                                         : "").apply();
                                 mContext.getSharedPreferences("LocalPreference", MODE_PRIVATE).edit().putBoolean("is_logged", true).apply();
 
-                                startActivity(new Intent(mContext, MainActivity.class));
+                                String url = "http://www.hnotes.org/api/login/facebook";
+                                RequestParams params = new RequestParams();
+                                params.put("access_token", AccessToken.getCurrentAccessToken().getToken());
+
+                                mClient.post(url, params, new AsyncHttpResponseHandler() {
+                                    @Override
+                                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                        try {
+                                            JsonObject response = mParser.parse(new String(responseBody)).getAsJsonObject();
+                                            Log.d("RESPONSE", new String(responseBody));
+
+                                            if (response.get("status").getAsInt() == 200) {
+
+
+                                                String user_id = (response.toString().contains("id")
+                                                        && response.get("data").getAsJsonObject().get("user").getAsJsonObject().get("id").getAsString() != null)
+                                                        ? response.get("data").getAsJsonObject().get("user").getAsJsonObject().get("id").getAsString()
+                                                        : "";
+
+                                                String api_token = (response.toString().contains("api_token") && response.get("data").getAsJsonObject().get("user").getAsJsonObject().get("api_token").getAsString() != null)
+                                                        ? response.get("data").getAsJsonObject().get("user").getAsJsonObject().get("api_token").getAsString()
+                                                        : "";
+
+                                                SharedPreferences prefs = mContext.getSharedPreferences("LocalPreference", MODE_PRIVATE);
+                                                prefs.edit().putString("user_id", user_id).apply();
+                                                prefs.edit().putString("api_token", api_token).apply();
+                                                Log.d("ASAP", prefs.getAll().toString());
+
+
+                                                startActivity(new Intent(mContext, MainActivity.class));
+
+                                            } else {
+//                                                JsonObject errorObj = response.get("error").getAsJsonObject();
+                                            }
+                                        } catch (Exception ignored) {
+                                            ignored.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                                        Toast.makeText(mContext, R.string.error, Toast.LENGTH_LONG).show();
+                                    }
+                                });
                             }
                         });
 
