@@ -87,7 +87,7 @@ public class HistoryActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View itemView, int position) {
                 startActivity(new Intent(mContext, DocumentActivity.class)
-                        .putExtra("URL", mList.get(position).getImg_url()));
+                        .putExtra("URL", mList.get(position).getContent()));
             }
 
             @Override
@@ -132,11 +132,15 @@ public class HistoryActivity extends AppCompatActivity {
                     JsonObject response = mParser.parse(new String(responseBody)).getAsJsonObject();
 
                     if (response.get("status").getAsInt() == 200) {
-                        for (JsonElement item : response.get("data").getAsJsonObject().get("notes").getAsJsonArray())
+                        for (JsonElement item : response.get("data").getAsJsonObject().get("notes").getAsJsonArray()) {
+                            String url = "http://www.hnotes.org/api/uploads/images/"+                                    item.getAsJsonObject().get("image_url").getAsString();
+
                             mList.add(new HistoryItem(item.getAsJsonObject().get("title").getAsString(),
                                     item.getAsJsonObject().get("created_at").getAsString(),
+                                    url,
                                     item.getAsJsonObject().get("content").getAsString()));
 
+                        }
 //                        startActivity(new Intent(mContext, MainActivity.class));
                     } else {
 //                                                JsonObject errorObj = response.get("error").getAsJsonObject();

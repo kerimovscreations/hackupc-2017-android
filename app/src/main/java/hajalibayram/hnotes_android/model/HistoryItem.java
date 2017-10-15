@@ -9,15 +9,24 @@ package hajalibayram.hnotes_android.model;
  */
 
 public class HistoryItem {
-    private String title, date, img_url;
+    private String title, date, img_url,content;
 
-    public HistoryItem(String title, String date, String img_url) {
+    public HistoryItem(String title, String date, String img_url,String content) {
         this.title = title;
         this.date = date;
         this.img_url = img_url;
+        this.content = content;
     }
 
     public HistoryItem() {
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getTitle() {
