@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "121484446",
+    "firebase_url": "https://hnotes-3dfc6.firebaseio.com",
+    "project_id": "hnotes-3dfc6",
+    "storage_bucket": "hnotes-3dfc6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:121484446:android:b34548b7b5605645",
+        "android_client_info": {
+          "package_name": "hajalibayram.hnotes_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "121484446-3ltpt7c7qb76l4k061f9408g6bcnl4k6.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "121484446-bied9670h1nkt09uvrkjmjd8q7m474g0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hajalibayram.hnotes_android",
+            "certificate_hash": "8fc96f150e14add16943a321bb936f2888599d9d"
+          }
+        },
+        {
+          "client_id": "121484446-kbefu3p8c8s7n6h9fia7an7leaj5fssa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8WBb1sD-QrYI7ZB1H5nxF-c1xjCMwiPE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "121484446-3ltpt7c7qb76l4k061f9408g6bcnl4k6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

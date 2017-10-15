@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -18,6 +20,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -36,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
     private int mUserChooseTask;
     private Uri mFileUri;
     private Context mContext;
+    private boolean isLogged;
+    private SharedPreferences mPrefs;
+    private SharedPreferences.Editor mEditor;
+    private TextView mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +55,46 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initVars() {
+        mPrefs = mContext.getSharedPreferences("LocalPreference", Context.MODE_PRIVATE);
+        mEditor = mPrefs.edit();
+        isLogged = mPrefs.getBoolean("is_logged", false);
+
+        mAuth = (TextView) findViewById(R.id.auth_btn);
+
+
+        findViewById(R.id.auth_btn_lay).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!isLogged) {
+                    startActivity(new Intent(mContext, AuthActivity.class));
+                    finish();
+                } else {
+                    final BottomSheetDialog bsd = new BottomSheetDialog(mContext);
+                    View sheetView = getLayoutInflater().inflate(R.layout.view_bottom_sheet_log_out, null);
+
+                    sheetView.findViewById(R.id.yes).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mEditor.putBoolean("is_logged", false).apply();
+
+//                            finish();
+                            startActivity(getIntent());
+                        }
+                    });
+                    sheetView.findViewById(R.id.no).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            bsd.cancel();
+                        }
+                    });
+
+                    bsd.setContentView(sheetView);
+                    bsd.show();
+                }
+            }
+        });
+
+
         findViewById(R.id.take_photo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,13 +115,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(mContext, HistoryActivity.class));
             }
         });
-        findViewById(R.id.auth_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(mContext, AuthActivity.class));
-            }
-        });
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAuth.setText(isLogged ? mPrefs.getString("name", "User") : getString(R.string.login));
+        ((ImageView) findViewById(R.id.auth_btn_icon)).setImageResource(isLogged ? R.drawable.ic_logout : R.drawable.ic_login);
     }
 
     @TargetApi(Build.VERSION_CODES.M)

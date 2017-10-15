@@ -7,23 +7,36 @@
         android:layout_height="match_parent"
         android:background="@drawable/main_bg">
 
-        <TextView
-            android:id="@+id/auth_btn"
+        <LinearLayout
+            android:id="@+id/auth_btn_lay"
             android:layout_width="wrap_content"
-            android:layout_height="32dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_margin="@dimen/normal_margin"
-            android:drawableEnd="@drawable/ic_login"
-            android:gravity="center"
-            android:text="@string/login"
-            android:textColor="#fff"
-            android:textSize="20dp" />
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/auth_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginEnd="@dimen/normal_margin"
+                android:gravity="center"
+                android:text="@string/login"
+                android:textColor="#fff"
+                android:textSize="20dp" />
+
+            <ImageView
+                android:id="@+id/auth_btn_icon"
+                android:layout_width="?actionBarSize"
+                android:layout_height="?actionBarSize"
+                android:padding="@dimen/small_margin"
+                android:src="@drawable/ic_login" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/add_new_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/auth_btn"
+            android:layout_below="@id/auth_btn_lay"
             android:layout_margin="@dimen/normal_margin"
             android:gravity="center"
             android:text="@string/add_new_ones"

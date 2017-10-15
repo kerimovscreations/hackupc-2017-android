@@ -21,5 +21,8 @@
     <string name="use_facebook">Use Facebook</string>
     <string name="use_google">Use Google</string>
     <string name="sign_in_with">Sign in with...</string>
+    <string name="log_out_alert_sub">You sure you want to terminate your sync?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
 
 </resources>
