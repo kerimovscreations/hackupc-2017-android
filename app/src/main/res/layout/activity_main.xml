@@ -144,40 +144,7 @@
             android:layout_width="match_parent"
             android:layout_height="32dp"
             android:layout_alignParentBottom="true"
-
+            android:layout_marginBottom="@dimen/normal_margin"
             android:src="@drawable/app_icon_title" />
     </RelativeLayout>
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:gravity="center"-->
-    <!--android:orientation="vertical"-->
-    <!--android:weightSum="2">-->
-
-    <!--<ImageView-->
-    <!--android:id="@+id/take_snap"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="0dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:background="#fff"-->
-    <!--android:clickable="true"-->
-    <!--android:padding="64dp"-->
-    <!--android:src="@drawable/ic_camera" />-->
-
-    <!--<ImageView-->
-    <!--android:id="@+id/choose_from_library"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="0dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:background="#fff"-->
-    <!--android:clickable="true"-->
-    <!--android:padding="64dp"-->
-    <!--android:src="@drawable/ic_camera_filled" />-->
-    <!--</LinearLayout>-->
-
-    <!--<Button-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:onClick="onHistory"-->
-    <!--android:text="To history" />-->
 </android.support.design.widget.CoordinatorLayout>

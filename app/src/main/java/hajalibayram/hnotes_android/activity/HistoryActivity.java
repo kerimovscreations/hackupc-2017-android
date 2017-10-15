@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.v4.app.ShareCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -77,7 +78,7 @@ public class HistoryActivity extends AppCompatActivity {
 
             @Override
             public void onShareClick(View itemView, int position) {
-
+                share(mList.get(position).getImg_url());
             }
         });
 
@@ -99,6 +100,20 @@ public class HistoryActivity extends AppCompatActivity {
 
         mAdapter.notifyDataSetChanged();
         mSwipeRLayout.setRefreshing(false);
+    }
+
+    public void share(String text) {
+        String mimeType = "text/plain";
+        String title = "Select one";
+
+        Intent shareIntent = ShareCompat.IntentBuilder.from(this)
+                .setChooserTitle(title)
+                .setType(mimeType)
+                .setText(text)
+                .getIntent();
+        if (shareIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(shareIntent);
+        }
     }
 
     @Override
